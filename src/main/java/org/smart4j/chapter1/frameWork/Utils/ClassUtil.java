@@ -26,7 +26,6 @@ public class ClassUtil {
      */
 
     public static ClassLoader getClassLoader() {
-
         return Thread.currentThread().getContextClassLoader();
     }
 
@@ -35,7 +34,6 @@ public class ClassUtil {
      * 加载类
      */
     public static Class<?> loadClass(String className, boolean isInitialized) {
-
         Class<?> cls;
         try {
             cls = Class.forName(className, isInitialized, getClassLoader());
@@ -54,9 +52,7 @@ public class ClassUtil {
     public static Set<Class<?>> getClassSet(String packageName) {
 
         Set<Class<?>> classes = new HashSet<>();
-
         try {
-
             Enumeration<URL> urls =
                     getClassLoader().getResources(packageName.replace(".", "/"));
 
@@ -159,10 +155,10 @@ public class ClassUtil {
 
     }
 
-    public static void main(String... args) {
+   /* public static void main(String... args) {
         Set<Class<?>> classSet = ClassUtil.getClassSet("org.smart4j.chapter1.frameWork.Utils");
         System.out.println(classSet.size());
     }
-
+*/
 
 }

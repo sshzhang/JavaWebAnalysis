@@ -13,6 +13,10 @@ import java.util.Properties;
  */
 public class PropsUtil {
 
+    static {
+        System.out.println("PropsUtil");
+    }
+
     private static final Logger LOGGER = LoggerFactory.getLogger(PropsUtil.class);
 
 
