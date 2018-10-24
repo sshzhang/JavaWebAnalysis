@@ -20,7 +20,9 @@ public class ClassUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ClassUtil.class);
 
-
+    static {
+        System.out.println("ClassUtil");
+    }
     /**
      * 获取类的加载器
      */
@@ -155,10 +157,9 @@ public class ClassUtil {
 
     }
 
-   /* public static void main(String... args) {
+    public static void main(String... args) {
         Set<Class<?>> classSet = ClassUtil.getClassSet("org.smart4j.chapter1.frameWork.Utils");
         System.out.println(classSet.size());
     }
-*/
 
 }

@@ -5,6 +5,9 @@ package org.smart4j.chapter1.frameWork.Utils;
  */
 public class CastUtil {
 
+    static {
+        System.out.println("CastUtil INit");
+    }
     public static String castString(Object object) {
 
         return CastUtil.castString(object, "");
