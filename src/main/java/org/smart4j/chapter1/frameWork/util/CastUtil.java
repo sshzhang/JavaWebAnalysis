@@ -1,4 +1,4 @@
-package org.smart4j.chapter1.frameWork.Utils;
+package org.smart4j.chapter1.frameWork.util;
 
 /**
  * 转型操作工具类

@@ -1,6 +1,6 @@
 package org.smart4j.chapter1.frameWork.helper;
 
-import org.smart4j.chapter1.frameWork.Utils.ReflectionUtil;
+import org.smart4j.chapter1.frameWork.util.ReflectionUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +18,8 @@ public class BeanHelper {
     private static final Map<Class<?>, Object> BEAN_MAP = new HashMap<Class<?>, Object>();
 
     static {
+
+        System.out.println("BeanHelper.class Init!");
 
         Set<Class<?>> beanClassSet =
                 ClassHelper.getBeanClassSet();

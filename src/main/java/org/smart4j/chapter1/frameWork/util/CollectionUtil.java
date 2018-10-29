@@ -1,4 +1,4 @@
-package org.smart4j.chapter1.frameWork.Utils;
+package org.smart4j.chapter1.frameWork.util;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;

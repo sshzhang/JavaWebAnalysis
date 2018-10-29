@@ -1,4 +1,4 @@
-package org.smart4j.chapter1.frameWork.Utils;
+package org.smart4j.chapter1.frameWork.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -158,7 +158,7 @@ public class ClassUtil {
     }
 
     public static void main(String... args) {
-        Set<Class<?>> classSet = ClassUtil.getClassSet("org.smart4j.chapter1.frameWork.Utils");
+        Set<Class<?>> classSet = ClassUtil.getClassSet("org.smart4j.chapter1.frameWork.util");
         System.out.println(classSet.size());
     }
 

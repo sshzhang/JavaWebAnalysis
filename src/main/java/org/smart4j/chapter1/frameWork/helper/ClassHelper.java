@@ -1,6 +1,6 @@
 package org.smart4j.chapter1.frameWork.helper;
 
-import org.smart4j.chapter1.frameWork.Utils.ClassUtil;
+import org.smart4j.chapter1.frameWork.util.ClassUtil;
 import org.smart4j.chapter1.frameWork.annotation.Controller;
 import org.smart4j.chapter1.frameWork.annotation.Service;
 
@@ -14,6 +14,8 @@ public class ClassHelper {
 
     private static final Set<Class<?>> CLASS_SET;
     static {
+        System.out.println("ClassHelper.class Init!");
+
         String basePackage = ConfigHelper.getAppBasePackage();
         CLASS_SET = ClassUtil.getClassSet(basePackage);
     }
