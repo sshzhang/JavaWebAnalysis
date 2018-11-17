@@ -11,7 +11,7 @@ import org.smart4j.chapter1.frameWork.util.ClassUtil;
  */
 public final class HelperLoader {
 
-    public  static  void inint() {
+    public  static  void init() {
 
         Class<?>[] classList = {ClassHelper.class, BeanHelper.class, IocHelper.class, ControllerHelper.class};
 
