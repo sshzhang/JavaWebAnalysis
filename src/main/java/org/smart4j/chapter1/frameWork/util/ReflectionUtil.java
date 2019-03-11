@@ -52,8 +52,10 @@ public class ReflectionUtil {
 
     /**
      * 设置成员变量的值
+     * @param obj  对应的对象
+     * @param field 对应的字段
+     * @param value  对应字段的值
      */
-
     public static void setField(Object obj, Field field, Object value) {
 
         try {

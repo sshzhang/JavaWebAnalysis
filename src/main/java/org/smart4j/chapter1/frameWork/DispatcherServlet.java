@@ -14,6 +14,7 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,12 +28,12 @@ import java.util.Map;
 /**
  * 请求转发器
  */
-public class DispatcherServlet extends HttpServlet {
 
+@WebServlet(urlPatterns = "/*", loadOnStartup = 0)
+public class DispatcherServlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
-
         //初始化相关Helper　类
         HelperLoader.init();
         //获取ServletContext 对象 用于注册Servlet
@@ -52,8 +53,6 @@ public class DispatcherServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
         String requestMethod = req.getMethod().toLowerCase();
         String pathInfo = req.getPathInfo();
         Handler handler = ControllerHelper.getHandler(requestMethod, pathInfo);
@@ -71,66 +70,43 @@ public class DispatcherServlet extends HttpServlet {
             }
             String body = CodecUtils.decodeURL(StreamUtil.getString(req.getInputStream()));
             if (StringUtil.isNotEmpty(body)) {
-
                 String[] params = StringUtils.split(body, "&");
-
-                if(ArrayUtil.isNotEmpty(params)) {
-
+                if (ArrayUtil.isNotEmpty(params)) {
                     for (String param : params) {
-
                         String[] array = StringUtils.split(param, "=");
-
                         if (ArrayUtil.isNotEmpty(array) && array.length == 2) {
-
                             String paramName = array[0];
                             String paramValue = array[1];
                             paramMap.put(paramName, paramValue);
-
                         }
-
-
                     }
                 }
-
             }
-
             Param param = new Param(paramMap);
             Method actionMethod =
                     handler.getActionMethod();
             Object result = ReflectionUtil.invokeMethod(controllerBean, actionMethod, param);
-
             //处理Action方法返回值
-
             if (result instanceof View) {
                 // 返回JSP页面
-
                 View view = (View) result;
-
                 String path = view.getPath();
-
                 if (StringUtil.isNotEmpty(path)) {
-
                     if (path.startsWith("/")) {//重定向
                         resp.sendRedirect(req.getContextPath() + path);
-                    }else{//转发
-
+                    } else {//转发
                         Map<String, Object> model = view.getModel();
                         for (Map.Entry<String, Object> entry : model.entrySet()) {
                             req.setAttribute(entry.getKey(), entry.getValue());
                         }
                         req.getRequestDispatcher(ConfigHelper.getAppJspPath() + path).forward(req, resp);
                     }
-
                 }
-
             } else if (result instanceof Data) {
-
                 //返回JSON数据
                 Data data = (Data) result;
                 Object model = data.getModel();
-
                 if (model != null) {
-
                     resp.setContentType("application/json");
                     resp.setCharacterEncoding("UTF-8");
                     PrintWriter writer = resp.getWriter();
@@ -140,8 +116,6 @@ public class DispatcherServlet extends HttpServlet {
                     writer.close();
                 }
             }
-
-
         }
     }
 }
